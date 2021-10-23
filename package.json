@@ -4,7 +4,7 @@
   "description": "REST API w/ Node.js, Express, &amp; MongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/mattsalmons/RESTapi/issues"
   },
-  "homepage": "https://github.com/mattsalmons/RESTapi#readme"
+  "homepage": "https://github.com/mattsalmons/RESTapi#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.14"
+  }
 }
