@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Subscriber = require('../models/subscriber');
 
+
 // Get all subscribers
 router.get('/', async (req, res) => {
   try {
@@ -12,11 +13,13 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Get one subscriber
-router.get('/:id', (req, res) => {
-  let id = req.params.id;
-  res.send(`get subscriber ${id}`);
+router.get('/:id', getSubscriber, (req, res) => {
+ res.send(res.subscriber.name);
 });
+
+
 // Create a subscriber
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
@@ -30,13 +33,33 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+
 // Update a subscriber
 router.patch('/:id', (req, res) => {
 
 });
+
+
 // Delete a subscriber
 router.delete('/:id', (req, res) => {
 
 });
+
+async function getSubscriber(req, res, next) {
+  let subscriber;
+  try {
+    subscriber = await Subscriber.findById(req.params.id);
+    if (subscriber == null) {
+      return res.status(404).json({ message: 'Cannot find subscriber' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
+  res.subscriber = subscriber;
+  next();
+};
+
 
 module.exports = router;
