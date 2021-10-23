@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Subscriber = require('../models/subscriber');
 
-
 // Get all subscribers
 router.get('/', async (req, res) => {
   try {
@@ -13,12 +12,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-
 // Get one subscriber
 router.get('/:id', getSubscriber, (req, res) => {
  res.send(res.subscriber);
 });
-
 
 // Create a subscriber
 router.post('/', async (req, res) => {
@@ -33,7 +30,6 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 
 // Update a subscriber
 router.patch('/:id', getSubscriber, async (req, res) => {
@@ -53,7 +49,6 @@ router.patch('/:id', getSubscriber, async (req, res) => {
   }
 });
 
-
 // Delete a subscriber
 router.delete('/:id', getSubscriber, async (req, res) => {
   try {
@@ -64,6 +59,7 @@ router.delete('/:id', getSubscriber, async (req, res) => {
   }
 });
 
+// Middleware
 async function getSubscriber(req, res, next) {
   let subscriber;
   try {
@@ -78,6 +74,5 @@ async function getSubscriber(req, res, next) {
   res.subscriber = subscriber;
   next();
 };
-
 
 module.exports = router;
