@@ -47,7 +47,7 @@ router.patch('/:id', getSubscriber, async (req, res) => {
 
   try {
     const updatedSubscriber = await res.subscriber.save();
-    res.jason(updatedSubscriber);
+    res.json(updatedSubscriber);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
